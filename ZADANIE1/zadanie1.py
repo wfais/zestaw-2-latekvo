@@ -12,13 +12,13 @@ def apply(x, d, max_d):
         if d == max_d:
             x.append(len(x)+1)
         for e in x:
-            apply(e, d+1)
+            apply(e, d+1, max_d)
     elif isinstance(x, tuple):
         for e in x:
-            apply(e, d+1)
+            apply(e, d+1, max_d)
     elif isinstance(x, dict):
         for v in x.values():
-            apply(v, d+1)
+            apply(v, d+1, max_d)
 
 def dodaj_element(wejscie):
     max_d = depth(wejscie)
