@@ -1,6 +1,28 @@
-def dodaj_element(wejscie):
-    # może warto zdefiniować zagnieżdżoną funkcję
+def depth(x):
+    if isinstance(x, list):
+        return 1 + (max([depth(e) for e in x]) if x else 0)
+    if isinstance(x, tuple):
+        return 1 + (max([depth(e) for e in x]) if x else 0)
+    if isinstance(x, dict):
+        return 1 + (max([depth(v) for v in x.values()]) if x else 0)
+    return 0
 
+def apply(x, d, max_d):
+    if isinstance(x, list):
+        if d == max_d:
+            x.append(len(x)+1)
+        for e in x:
+            apply(e, d+1)
+    elif isinstance(x, tuple):
+        for e in x:
+            apply(e, d+1)
+    elif isinstance(x, dict):
+        for v in x.values():
+            apply(v, d+1)
+
+def dodaj_element(wejscie):
+    max_d = depth(wejscie)
+    apply(wejscie, 1, max_d)
     return wejscie
 
 if __name__ == '__main__':
